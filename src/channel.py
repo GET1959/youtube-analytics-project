@@ -5,6 +5,7 @@ from typing import Any
 from dotenv import load_dotenv
 from googleapiclient.discovery import build
 
+
 load_dotenv()
 
 
@@ -30,6 +31,30 @@ class Channel:
         self.subscriber_count = self.channel["items"][0]["statistics"]["subscriberCount"]
         self.video_count = self.channel["items"][0]["statistics"]["videoCount"]
         self.view_count = self.channel["items"][0]["statistics"]["viewCount"]
+
+    def __str__(self) -> str:
+        return f"{self.title} ({self.url})"
+
+    def __add__(self, other: Any) -> int:
+        return int(self.subscriber_count) + int(other.subscriber_count)
+
+    def __sub__(self, other: Any) -> int:
+        return int(self.subscriber_count) - int(other.subscriber_count)
+
+    def __gt__(self, other: Any) -> bool:
+        return int(self.subscriber_count) > int(other.subscriber_count)
+
+    def __ge__(self, other: Any) -> bool:
+        return int(self.subscriber_count) >= int(other.subscriber_count)
+
+    def __lt__(self, other: Any) -> bool:
+        return int(self.subscriber_count) < int(other.subscriber_count)
+
+    def __le__(self, other: Any) -> bool:
+        return int(self.subscriber_count) <= int(other.subscriber_count)
+
+    def __eq__(self, other: Any) -> bool:
+        return int(self.subscriber_count) == int(other.subscriber_count)
 
     @classmethod
     def get_service(cls) -> Any:
