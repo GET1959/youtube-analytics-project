@@ -54,7 +54,10 @@ class Channel:
         return int(self.subscriber_count) <= int(other.subscriber_count)
 
     def __eq__(self, other: Any) -> bool:
-        return int(self.subscriber_count) == int(other.subscriber_count)
+        if isinstance(other, Channel):
+            return self.subscriber_count == other.subscriber_count
+        else:
+            raise TypeError
 
     @classmethod
     def get_service(cls) -> Any:
