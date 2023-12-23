@@ -35,7 +35,7 @@ lines_after_imports = 2
 skip = '__init__.py'
 
 [tool.black]
-line-length = 100
+line-length = 120
 exclude = """
     venv/
     tests/
