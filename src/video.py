@@ -10,7 +10,7 @@ load_dotenv()
 VIDEO_ID = "4fObz_qw9u4"
 
 
-def get_info(video_id: str = VIDEO_ID, playlist_id=None) -> Any:
+def get_info(video_id=None, playlist_id=None) -> Any:
     """
     Функция принимает на вход video_id и опционально playlist_id.
     Если playlist_id не передан, возвращает статистику по видео,
@@ -29,7 +29,7 @@ def get_info(video_id: str = VIDEO_ID, playlist_id=None) -> Any:
             .execute()
         )
     else:
-        return youtube.videos().list(part="snippet,statistics", id=video_id).execute()
+        return youtube.videos().list(part="snippet,statistics,contentDetails", id=video_id).execute()
 
 
 class Video:
